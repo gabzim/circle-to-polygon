@@ -1,0 +1,24 @@
+{
+  "name": "circle-to-polygon",
+  "version": "1.0.0",
+  "description": "Receives a Coordinate, a Radius and a Number of edges and aproximates a circle by creating a polygon that fills its area",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/arg20/circle-to-radius.git"
+  },
+  "keywords": [
+    "GeoJSON",
+    "circle",
+    "polygon"
+  ],
+  "author": "Gabriel Zimmermann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arg20/circle-to-radius/issues"
+  },
+  "homepage": "https://github.com/arg20/circle-to-radius#readme"
+}

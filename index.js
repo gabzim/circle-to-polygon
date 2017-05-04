@@ -35,6 +35,6 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
 
   return {
     type: 'Polygon',
-    coordinates: [coordinates]
+    coordinates: [coordinates.reverse()]
   };
 };

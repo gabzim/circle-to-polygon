@@ -1,6 +1,6 @@
 {
   "name": "circle-to-polygon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Receives a Coordinate, a Radius and a Number of edges and aproximates a circle by creating a polygon that fills its area",
   "main": "index.js",
   "scripts": {

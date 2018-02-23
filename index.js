@@ -24,12 +24,12 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
   var n = numberOfSegments ? numberOfSegments : 32;
   var flatCoordinates = [];
   var coordinates = [];
-  for (let i = 0; i < n; ++i) {
+  for (var i = 0; i < n; ++i) {
     flatCoordinates.push.apply(flatCoordinates, offset(center, radius, 2 * Math.PI * i / n));
   }
   flatCoordinates.push(flatCoordinates[0], flatCoordinates[1]);
 
-  for (let i = 0, j = 0; j < flatCoordinates.length; j += 2) {
+  for (var i = 0, j = 0; j < flatCoordinates.length; j += 2) {
     coordinates[i++] = flatCoordinates.slice(j, j + 2);
   }
 

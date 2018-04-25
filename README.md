@@ -1,4 +1,4 @@
-# Circle To Radius
+# Circle To Polygon
 
 The GeoJSON spec does not support circles. If you wish to create an area that represents a circle, your best bet is to create a polygon that roughly approximates the circle. In the limit of the number of edges becoming infinite, your Polygon will match a circle.
 

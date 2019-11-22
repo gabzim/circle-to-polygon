@@ -65,4 +65,43 @@ describe("Input verification", () => {
       );
     });
   });
+  describe("Validating radius input", () => {
+    it("should throw error on invalidy type input", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], [], 32),
+        Error,
+        "ERROR! Radius has to a positive number but was: object"
+      );
+
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], "[]", 32),
+        Error,
+        "ERROR! Radius has to a positive number but was: string"
+      );
+    });
+
+    xit("should throw error on too big radius value", () => {
+      // TODO: Find biggest value
+    });
+
+    it("should throw error on too smal radius value", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 0, 32),
+        Error,
+        `ERROR! Radius has to a positive number but was: 0`
+      );
+
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], -1, 32),
+        Error,
+        `ERROR! Radius has to a positive number but was: -1`
+      );
+
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], -10, 32),
+        Error,
+        `ERROR! Radius has to a positive number but was: -10`
+      );
+    });
+  });
 });

@@ -1,10 +1,10 @@
 "use strict";
 function toRadians(angleInDegrees) {
-  return angleInDegrees * Math.PI / 180;
+  return (angleInDegrees * Math.PI) / 180;
 }
 
 function toDegrees(angleInRadians) {
-  return angleInRadians * 180 / Math.PI;
+  return (angleInRadians * 180) / Math.PI;
 }
 
 function offset(c1, distance, bearing) {
@@ -13,14 +13,49 @@ function offset(c1, distance, bearing) {
   var dByR = distance / 6378137; // distance divided by 6378137 (radius of the earth) wgs84
   var lat = Math.asin(
     Math.sin(lat1) * Math.cos(dByR) +
-    Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing));
-  var lon = lon1 + Math.atan2(
+      Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
+  );
+  var lon =
+    lon1 +
+    Math.atan2(
       Math.sin(bearing) * Math.sin(dByR) * Math.cos(lat1),
-      Math.cos(dByR) - Math.sin(lat1) * Math.sin(lat));
+      Math.cos(dByR) - Math.sin(lat1) * Math.sin(lat)
+    );
   return [toDegrees(lon), toDegrees(lat)];
 }
 
+function validateCenter(center) {
+  if (!Array.isArray(center) || center.length !== 2) {
+    throw new Error("ERROR! Center has to be an array of length two");
+  }
+  const [lng, lat] = center;
+  if (typeof lng !== "number" || typeof lat !== "number") {
+    throw new Error(
+      `ERROR! Longitude and Latitude has to be numbers but where ${typeof lng} and ${typeof lat}`
+    );
+  }
+  if (lng > 180 || lng < -180) {
+    throw new Error(
+      `ERROR! Longitude has to be between -180 and 180 but was ${lng}`
+    );
+  }
+
+  if (lat > 90 || lat < -90) {
+    throw new Error(
+      `ERROR! Latitude has to be between -90 and 90 but was ${lat}`
+    );
+  }
+
+  return true;
+}
+
+function validateInput({ center }) {
+  return validateCenter(center);
+}
+
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {
+  validateInput({ center, radius, numberOfSegments });
+
   var n = numberOfSegments ? numberOfSegments : 32;
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
@@ -29,7 +64,7 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
   coordinates.push(coordinates[0]);
 
   return {
-    type: 'Polygon',
+    type: "Polygon",
     coordinates: [coordinates]
   };
 };

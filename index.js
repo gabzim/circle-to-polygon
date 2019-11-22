@@ -65,8 +65,28 @@ function validateRadius(radius) {
   return true;
 }
 
-function validateInput({ center, radius }) {
-  return validateCenter(center) && validateRadius(radius);
+function validateNumberOfSegments(numberOfSegments) {
+  if (typeof numberOfSegments !== "number") {
+    throw new Error(
+      `ERROR! Number of segments has to a number but was: ${typeof numberOfSegments}`
+    );
+  }
+
+  if (numberOfSegments < 3) {
+    throw new Error(
+      `ERROR! Number of segments has to be at least 3 but was: ${numberOfSegments}`
+    );
+  }
+
+  return true;
+}
+
+function validateInput({ center, radius, numberOfSegments }) {
+  return (
+    validateCenter(center) &&
+    validateRadius(radius) &&
+    validateNumberOfSegments(numberOfSegments)
+  );
 }
 
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {

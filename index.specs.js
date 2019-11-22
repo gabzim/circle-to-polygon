@@ -104,4 +104,32 @@ describe("Input verification", () => {
       );
     });
   });
+
+  describe("Validating number of segments input", () => {
+    it("should throw error on invalid numberOfSegments values", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 50, -1),
+        Error,
+        "ERROR! Number of segments has to be at least 3 but was: -1"
+      );
+    });
+
+    assert.throws(
+      () => circleToPolygon([-59.99029, -58.99029], 50, 0),
+      Error,
+      "ERROR! Number of segments has to be at least 3 but was: 0"
+    );
+
+    assert.throws(
+      () => circleToPolygon([-59.99029, -58.99029], 50, 1),
+      Error,
+      "ERROR! Number of segments has to be at least 3 but was: 1"
+    );
+
+    assert.throws(
+      () => circleToPolygon([-59.99029, -58.99029], 50, 2),
+      Error,
+      "ERROR! Number of segments has to be at least 3 but was: 2"
+    );
+  });
 });

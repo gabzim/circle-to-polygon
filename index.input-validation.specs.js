@@ -1,5 +1,5 @@
 const { assert } = require("chai");
-const circleToPolygon = require("./");
+const circleToPolygon = require(".");
 
 describe("Input verification", () => {
   describe("Validating center input", () => {

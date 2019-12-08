@@ -70,13 +70,13 @@ describe("Input verification", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], [], 32),
         Error,
-        "ERROR! Radius has to a positive number but was: object"
+        "ERROR! Radius has to be a positive number but was: object"
       );
 
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], "[]", 32),
         Error,
-        "ERROR! Radius has to a positive number but was: string"
+        "ERROR! Radius has to be a positive number but was: string"
       );
     });
 
@@ -88,19 +88,19 @@ describe("Input verification", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 0, 32),
         Error,
-        `ERROR! Radius has to a positive number but was: 0`
+        `ERROR! Radius has to be a positive number but was: 0`
       );
 
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], -1, 32),
         Error,
-        `ERROR! Radius has to a positive number but was: -1`
+        `ERROR! Radius has to be a positive number but was: -1`
       );
 
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], -10, 32),
         Error,
-        `ERROR! Radius has to a positive number but was: -10`
+        `ERROR! Radius has to be a positive number but was: -10`
       );
     });
   });
@@ -114,22 +114,24 @@ describe("Input verification", () => {
       );
     });
 
-    assert.throws(
-      () => circleToPolygon([-59.99029, -58.99029], 50, 0),
-      Error,
-      "ERROR! Number of segments has to be at least 3 but was: 0"
-    );
+    it("should throw error on too low value of numberOfSegments", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 50, 0),
+        Error,
+        "ERROR! Number of segments has to be at least 3 but was: 0"
+      );
 
-    assert.throws(
-      () => circleToPolygon([-59.99029, -58.99029], 50, 1),
-      Error,
-      "ERROR! Number of segments has to be at least 3 but was: 1"
-    );
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 50, 1),
+        Error,
+        "ERROR! Number of segments has to be at least 3 but was: 1"
+      );
 
-    assert.throws(
-      () => circleToPolygon([-59.99029, -58.99029], 50, 2),
-      Error,
-      "ERROR! Number of segments has to be at least 3 but was: 2"
-    );
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 50, 2),
+        Error,
+        "ERROR! Number of segments has to be at least 3 but was: 2"
+      );
+    });
   });
 });

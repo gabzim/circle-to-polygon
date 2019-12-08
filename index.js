@@ -50,13 +50,13 @@ function validateCenter(center) {
 function validateRadius(radius) {
   if (typeof radius !== "number") {
     throw new Error(
-      `ERROR! Radius has to a positive number but was: ${typeof radius}`
+      `ERROR! Radius has to be a positive number but was: ${typeof radius}`
     );
   }
 
   if (radius <= 0) {
     throw new Error(
-      `ERROR! Radius has to a positive number but was: ${radius}`
+      `ERROR! Radius has to be a positive number but was: ${radius}`
     );
   }
 }
@@ -64,7 +64,7 @@ function validateRadius(radius) {
 function validateNumberOfSegments(numberOfSegments) {
   if (typeof numberOfSegments !== "number") {
     throw new Error(
-      `ERROR! Number of segments has to a number but was: ${typeof numberOfSegments}`
+      `ERROR! Number of segments has to be a number but was: ${typeof numberOfSegments}`
     );
   }
 
@@ -82,10 +82,11 @@ function validateInput({ center, radius, numberOfSegments }) {
 }
 
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {
+  var n = numberOfSegments ? numberOfSegments : 32;
+
   // validateInput() throws error on invalid input and do nothing on valid input
   validateInput({ center, radius, numberOfSegments });
 
-  var n = numberOfSegments ? numberOfSegments : 32;
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
     coordinates.push(offset(center, radius, (2 * Math.PI * -i) / n));

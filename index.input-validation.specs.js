@@ -121,6 +121,21 @@ describe("Input verification", () => {
       );
     });
 
+    it("should NOT throw error when numberOfSegments >= 3", () => {
+      assert.doesNotThrow(
+        () => circleToPolygon([-59.99029, -58.99029], 3),
+        Error
+      );
+      assert.doesNotThrow(
+        () => circleToPolygon([-59.99029, -58.99029], 32),
+        Error
+      );
+      assert.doesNotThrow(
+        () => circleToPolygon([-59.99029, -58.99029], 500),
+        Error
+      );
+    });
+
     it("should throw error on too low value of numberOfSegments", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 50, 0),

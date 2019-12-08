@@ -62,7 +62,7 @@ function validateRadius(radius) {
 }
 
 function validateNumberOfSegments(numberOfSegments) {
-  if (typeof numberOfSegments !== "number") {
+  if (typeof numberOfSegments !== "number" && numberOfSegments !== undefined) {
     throw new Error(
       `ERROR! Number of segments has to be a number but was: ${typeof numberOfSegments}`
     );

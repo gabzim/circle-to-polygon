@@ -114,6 +114,13 @@ describe("Input verification", () => {
       );
     });
 
+    it("should NOT throw error when numberOfSegments is undefined", () => {
+      assert.doesNotThrow(
+        () => circleToPolygon([-59.99029, -58.99029], 50),
+        Error
+      );
+    });
+
     it("should throw error on too low value of numberOfSegments", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 50, 0),

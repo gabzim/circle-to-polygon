@@ -6,6 +6,10 @@ The GeoJSON spec does not support circles. If you wish to create an area that re
 
 `npm install --save circle-to-polygon`
 
+or
+
+`yarn add circle-to-polygon`
+
 ## Usage
 
 ```javascript

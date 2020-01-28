@@ -52,16 +52,21 @@ describe("Input verification", () => {
       );
     });
 
-    it("should only accept an array of length 2 as the circles center", () => {
+    it("should only accept an array of length 2 or 3 as the circles center", () => {
       assert.throws(
-        () => circleToPolygon([150, -91, 34], 100, 32),
+        () => circleToPolygon([150], 100, 32),
         Error,
-        "ERROR! Center has to be an array of length two"
+        "ERROR! Center has to be an array of length two or three"
+      );
+      assert.throws(
+        () => circleToPolygon([150, -91, 34, 29.32], 100, 32),
+        Error,
+        "ERROR! Center has to be an array of length two or three"
       );
       assert.throws(
         () => circleToPolygon({}, 100, 32),
         Error,
-        "ERROR! Center has to be an array of length two"
+        "ERROR! Center has to be an array of length two or three"
       );
     });
   });

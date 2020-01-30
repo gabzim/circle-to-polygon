@@ -274,6 +274,33 @@ describe("Output verification", () => {
           });
         });
       });
+
+      it("should accept coordinates with 'Altitude' or 'Elevation' attribute", () => {
+        const coordinates = circleToPolygon([0, 0, 34], 13, 12).coordinates[0];
+
+        const expectedCoordinates = [
+          [0, 0.000116],
+          [-0.000058, 0.000101],
+          [-0.000101, 0.000058],
+          [-0.000116, -2.145231e-20],
+          [-0.000101, -0.000058],
+          [-0.000058, -0.000101],
+          [1.430154e-20, -0.000116],
+          [0.000058, -0.000101],
+          [0.000101, -0.000058],
+          [0.000116, 7.150773e-21],
+          [0.000101, 0.000058],
+          [0.000058, 0.000101],
+          [0, 0.000116]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
     });
 
     describe("Testing non-trivial points", () => {

@@ -29,7 +29,7 @@ function offset(c1, distance, bearing) {
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {
   var n = numberOfSegments ? numberOfSegments : 32;
 
-  var centerAsLonLat = Array.isArray(center) ? center : [center.lon, center.lat];
+  var centerAsLonLat = getCenterAsLonLat(center);
   // validateInput() throws error on invalid input and do nothing on valid input
   validateInput({ center: centerAsLonLat, radius, numberOfSegments });
 
@@ -44,3 +44,19 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
     coordinates: [coordinates]
   };
 };
+
+function getCenterAsLonLat(center) {
+  if (Array.isArray(center)) {
+    return center;
+  }
+
+  var lat = center.lat;
+  var lon;
+  if (Object.prototype.hasOwnProperty.call(center, "lon")) {
+    lon = center.lon;
+  } else {
+    lon = center.lng;
+  }
+
+  return [lon, lat];
+}

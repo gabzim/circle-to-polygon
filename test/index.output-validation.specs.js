@@ -123,44 +123,47 @@ describe("Output verification", () => {
       });
 
       it("should give correct coordinates when center is object with keys lat and lng", () => {
-        const coordinates = circleToPolygon({ lng: 131.034184, lat: -25.343467 }, 5000, 32)
-          .coordinates[0];
+        const coordinates = circleToPolygon(
+          { lng: 131.034184, lat: -25.343467 },
+          5000,
+          32
+        ).coordinates[0];
 
-          const expectedCoordinates = [
-            [131.034184, -25.298551],
-            [131.024491, -25.299413],
-            [131.015171, -25.301969],
-            [131.006581, -25.306118],
-            [130.99905, -25.311702],
-            [130.992869, -25.318507],
-            [130.988274, -25.326271],
-            [130.985443, -25.334696],
-            [130.984485, -25.343458],
-            [130.985436, -25.352221],
-            [130.988261, -25.360648],
-            [130.992852, -25.368415],
-            [130.999032, -25.375223],
-            [131.006564, -25.38081],
-            [131.015158, -25.384962],
-            [131.024484, -25.387519],
-            [131.034184, -25.388382],
-            [131.043883, -25.387519],
-            [131.053209, -25.384962],
-            [131.061803, -25.38081],
-            [131.069335, -25.375223],
-            [131.075515, -25.368415],
-            [131.080106, -25.360648],
-            [131.082931, -25.352221],
-            [131.083882, -25.343458],
-            [131.082924, -25.334696],
-            [131.080093, -25.326271],
-            [131.075498, -25.318507],
-            [131.069317, -25.311702],
-            [131.061786, -25.306118],
-            [131.053196, -25.301969],
-            [131.043876, -25.299413],
-            [131.034184, -25.298551]
-          ];
+        const expectedCoordinates = [
+          [131.034184, -25.298551],
+          [131.024491, -25.299413],
+          [131.015171, -25.301969],
+          [131.006581, -25.306118],
+          [130.99905, -25.311702],
+          [130.992869, -25.318507],
+          [130.988274, -25.326271],
+          [130.985443, -25.334696],
+          [130.984485, -25.343458],
+          [130.985436, -25.352221],
+          [130.988261, -25.360648],
+          [130.992852, -25.368415],
+          [130.999032, -25.375223],
+          [131.006564, -25.38081],
+          [131.015158, -25.384962],
+          [131.024484, -25.387519],
+          [131.034184, -25.388382],
+          [131.043883, -25.387519],
+          [131.053209, -25.384962],
+          [131.061803, -25.38081],
+          [131.069335, -25.375223],
+          [131.075515, -25.368415],
+          [131.080106, -25.360648],
+          [131.082931, -25.352221],
+          [131.083882, -25.343458],
+          [131.082924, -25.334696],
+          [131.080093, -25.326271],
+          [131.075498, -25.318507],
+          [131.069317, -25.311702],
+          [131.061786, -25.306118],
+          [131.053196, -25.301969],
+          [131.043876, -25.299413],
+          [131.034184, -25.298551]
+        ];
 
         coordinates.forEach((cord, cordIndex) => {
           cord.forEach((value, valueIndex) => {
@@ -171,8 +174,80 @@ describe("Output verification", () => {
       });
 
       it("should give correct coordinates when center is object with keys latitude and longitude", () => {
-        const coordinates = circleToPolygon({ longitude: 16.226412, latitude: 58.556493 }, 138, 10)
-          .coordinates[0];
+        const coordinates = circleToPolygon(
+          { longitude: 16.226412, latitude: 58.556493 },
+          138,
+          10
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [16.226412, 58.557732],
+          [16.225015, 58.557495],
+          [16.224151, 58.556876],
+          [16.224151, 58.556109],
+          [16.225015, 58.55549],
+          [16.226412, 58.555253],
+          [16.227808, 58.55549],
+          [16.228672, 58.556109],
+          [16.228672, 58.556876],
+          [16.227808, 58.557495],
+          [16.226412, 58.557732]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should prioritize lat, lon keys when center is object with keys lat, lon, lng, latitude, and longitude", () => {
+        const coordinates = circleToPolygon(
+          {
+            lon: 16.226412,
+            lat: 58.556493,
+            lng: 54.23,
+            latitude: 42.252,
+            longitude: 67.273432
+          },
+          138,
+          10
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [16.226412, 58.557732],
+          [16.225015, 58.557495],
+          [16.224151, 58.556876],
+          [16.224151, 58.556109],
+          [16.225015, 58.55549],
+          [16.226412, 58.555253],
+          [16.227808, 58.55549],
+          [16.228672, 58.556109],
+          [16.228672, 58.556876],
+          [16.227808, 58.557495],
+          [16.226412, 58.557732]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should prioritize lat, lng keys when center is object with keys lat, lng, latitude, and longitude", () => {
+        const coordinates = circleToPolygon(
+          {
+            lng: 16.226412,
+            lat: 58.556493,
+            latitude: 42.252,
+            longitude: 67.273432
+          },
+          138,
+          10
+        ).coordinates[0];
 
         const expectedCoordinates = [
           [16.226412, 58.557732],

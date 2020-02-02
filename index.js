@@ -29,12 +29,13 @@ function offset(c1, distance, bearing) {
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {
   var n = numberOfSegments ? numberOfSegments : 32;
 
+  var centerAsLonLat = Array.isArray(center) ? center : [center.lon, center.lat];
   // validateInput() throws error on invalid input and do nothing on valid input
-  validateInput({ center, radius, numberOfSegments });
+  validateInput({ center: centerAsLonLat, radius, numberOfSegments });
 
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
-    coordinates.push(offset(center, radius, (2 * Math.PI * -i) / n));
+    coordinates.push(offset(centerAsLonLat, radius, (2 * Math.PI * -i) / n));
   }
   coordinates.push(coordinates[0]);
 

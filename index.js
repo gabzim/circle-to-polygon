@@ -1,5 +1,5 @@
 "use strict";
-var { validateInput } = require("./input-validation");
+var { validateInput, centerKeyValidation } = require("./input-validation");
 
 function toRadians(angleInDegrees) {
   return (angleInDegrees * Math.PI) / 180;
@@ -55,19 +55,18 @@ function getCenterAsLonLat(center) {
     return center;
   }
 
-  var lat;
-  if (objHasProp(center, "lat")) {
-    lat = center.lat;
-  } else {
-    lat = center.latitude;
-  }
+  centerKeyValidation(center);
 
+  var lat;
   var lon;
-  if (objHasProp(center, "lon")) {
+  if (objHasProp(center, "lat") && objHasProp(center, "lon")) {
+    lat = center.lat;
     lon = center.lon;
-  } else if (objHasProp(center, "lng")) {
+  } else if (objHasProp(center, "lat") && objHasProp(center, "lng")) {
+    lat = center.lat;
     lon = center.lng;
   } else {
+    lat = center.latitude;
     lon = center.longitude;
   }
 

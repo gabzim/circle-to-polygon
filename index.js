@@ -46,16 +46,29 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
 };
 
 function getCenterAsLonLat(center) {
+  function objHasProp(obj, prop) {
+    // .hasOwnProperty is not a protected method name
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+  }
+
   if (Array.isArray(center)) {
     return center;
   }
 
-  var lat = center.lat;
-  var lon;
-  if (Object.prototype.hasOwnProperty.call(center, "lon")) {
-    lon = center.lon;
+  var lat;
+  if (objHasProp(center, "lat")) {
+    lat = center.lat;
   } else {
+    lat = center.latitude;
+  }
+
+  var lon;
+  if (objHasProp(center, "lon")) {
+    lon = center.lon;
+  } else if (objHasProp(center, "lng")) {
     lon = center.lng;
+  } else {
+    lon = center.longitude;
   }
 
   return [lon, lat];

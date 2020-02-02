@@ -144,8 +144,17 @@ describe("Input Validation Verification", () => {
           "ERROR! Latitude has to be passed with key 'lat' when longitude is passed with key 'lon' or 'lng'"
         );
       });
+
+      it("should not allow { lng, latitude }", () => {
+        assert.throws(
+          () => circleToPolygon({ lng: 120, latitude: -32 }, 100, 32),
+          Error,
+          "ERROR! Latitude has to be passed with key 'lat' when longitude is passed with key 'lon' or 'lng'"
+        );
+      });
     });
   });
+
   describe("Validating radius input", () => {
     it("should throw error on invalidy type input", () => {
       assert.throws(

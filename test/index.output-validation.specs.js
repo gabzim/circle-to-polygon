@@ -170,6 +170,32 @@ describe("Output verification", () => {
         });
       });
 
+      it("should give correct coordinates when center is object with keys latitude and longitude", () => {
+        const coordinates = circleToPolygon({ longitude: 16.226412, latitude: 58.556493 }, 138, 10)
+          .coordinates[0];
+
+        const expectedCoordinates = [
+          [16.226412, 58.557732],
+          [16.225015, 58.557495],
+          [16.224151, 58.556876],
+          [16.224151, 58.556109],
+          [16.225015, 58.55549],
+          [16.226412, 58.555253],
+          [16.227808, 58.55549],
+          [16.228672, 58.556109],
+          [16.228672, 58.556876],
+          [16.227808, 58.557495],
+          [16.226412, 58.557732]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
       it("should give correct coordinates for point east of GMT, south of equator", () => {
         const coordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
           .coordinates[0];

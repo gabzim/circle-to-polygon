@@ -75,12 +75,12 @@ describe("Input Validation Verification", () => {
           `ERROR! Longitude has to be between -180 and 180 but was ${-181}`
         );
         assert.throws(
-          () => circleToPolygon({ lon: 181, lat: -58.99029 }, 100, 32),
+          () => circleToPolygon({ lng: 181, lat: -58.99029 }, 100, 32),
           Error,
           `ERROR! Longitude has to be between -180 and 180 but was ${181}`
         );
         assert.throws(
-          () => circleToPolygon({ lon: 1000, lat: -58.99029 }, 100, 32),
+          () => circleToPolygon({ longitude: 1000, latitude: -58.99029 }, 100, 32),
           Error,
           `ERROR! Longitude has to be between -180 and 180 but was ${1000}`
         );
@@ -88,7 +88,7 @@ describe("Input Validation Verification", () => {
 
       it("should throw error on invalid latitude values", () => {
         assert.throws(
-          () => circleToPolygon({ lon: -58.99029, lat: -91 }, 100, 32),
+          () => circleToPolygon({ lng: -58.99029, lat: -91 }, 100, 32),
           Error,
           `ERROR! Latitude has to be between -90 and 90 but was ${-91}`
         );
@@ -98,7 +98,7 @@ describe("Input Validation Verification", () => {
           `ERROR! Latitude has to be between -90 and 90 but was ${91}`
         );
         assert.throws(
-          () => circleToPolygon({ lon: -58.99029, lat: 120 }, 100, 32),
+          () => circleToPolygon({ longitude: -58.99029, latitude: 120 }, 100, 32),
           Error,
           `ERROR! Latitude has to be between -90 and 90 but was ${120}`
         );
@@ -111,7 +111,12 @@ describe("Input Validation Verification", () => {
           "ERROR! Longitude and Latitude has to be numbers but where string and number"
         );
         assert.throws(
-          () => circleToPolygon({ lon: -58.99029, lat: "konichiha" }, 100, 32),
+          () => circleToPolygon({ lng: ["hello"], lat: -91 }, 100, 32),
+          Error,
+          "ERROR! Longitude and Latitude has to be numbers but where object and number"
+        );
+        assert.throws(
+          () => circleToPolygon({ longitude: -58.99029, latitude: "konichiha" }, 100, 32),
           Error,
           "ERROR! Longitude and Latitude has to be numbers but where number and string"
         );

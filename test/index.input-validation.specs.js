@@ -80,7 +80,8 @@ describe("Input Validation Verification", () => {
           `ERROR! Longitude has to be between -180 and 180 but was ${181}`
         );
         assert.throws(
-          () => circleToPolygon({ longitude: 1000, latitude: -58.99029 }, 100, 32),
+          () =>
+            circleToPolygon({ longitude: 1000, latitude: -58.99029 }, 100, 32),
           Error,
           `ERROR! Longitude has to be between -180 and 180 but was ${1000}`
         );
@@ -98,7 +99,8 @@ describe("Input Validation Verification", () => {
           `ERROR! Latitude has to be between -90 and 90 but was ${91}`
         );
         assert.throws(
-          () => circleToPolygon({ longitude: -58.99029, latitude: 120 }, 100, 32),
+          () =>
+            circleToPolygon({ longitude: -58.99029, latitude: 120 }, 100, 32),
           Error,
           `ERROR! Latitude has to be between -90 and 90 but was ${120}`
         );
@@ -116,9 +118,22 @@ describe("Input Validation Verification", () => {
           "ERROR! Longitude and Latitude has to be numbers but where object and number"
         );
         assert.throws(
-          () => circleToPolygon({ longitude: -58.99029, latitude: "konichiha" }, 100, 32),
+          () =>
+            circleToPolygon(
+              { longitude: -58.99029, latitude: "konichiha" },
+              100,
+              32
+            ),
           Error,
           "ERROR! Longitude and Latitude has to be numbers but where number and string"
+        );
+      });
+
+      it("should not allow { lat, longitude }", () => {
+        assert.throws(
+          () => circleToPolygon({ longitude: 120, lat: -32 }, 100, 32),
+          Error,
+          "ERROR! Longitude has to be passed with key 'lon' or 'lng' when latiude is passed with key 'lat'"
         );
       });
     });

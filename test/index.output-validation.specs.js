@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const circleToPolygon = require("./index.js");
+const circleToPolygon = require("../index.js");
 
 describe("Output verification", () => {
   describe("Polygon should have correct attributes", () => {

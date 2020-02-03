@@ -271,6 +271,98 @@ describe("Output verification", () => {
         });
       });
 
+      it("should ignore lat value when log & lng key is missing but latitude & longitude key exists", () => {
+        const coordinates = circleToPolygon(
+          {
+            lat: 40.556493,
+            latitude: 40.556493,
+            longitude: 17.226412
+          },
+          44,
+          8
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [17.226412000000003, 40.55688825872501],
+          [17.22604413467261, 40.5567724895414],
+          [17.22589176203665, 40.55649299883326],
+          [17.226044137743937, 40.55621350929186],
+          [17.226412000000003, 40.556097741274996],
+          [17.226779862256063, 40.55621350929186],
+          [17.226932237963354, 40.55649299883326],
+          [17.226779865327394, 40.5567724895414],
+          [17.226412000000003, 40.55688825872501]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should ignore log value when lat key is missing latitude & longitude key exists", () => {
+        const coordinates = circleToPolygon(
+          {
+            log: -40.556493,
+            latitude: -40.556493,
+            longitude: 17.226412
+          },
+          44,
+          8
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [17.226412000000003, -40.556097741274996],
+          [17.226044137743937, -40.55621350929186],
+          [17.22589176203665, -40.55649299883326],
+          [17.22604413467261, -40.5567724895414],
+          [17.226412000000003, -40.55688825872501],
+          [17.226779865327394, -40.5567724895414],
+          [17.226932237963354, -40.55649299883326],
+          [17.226779862256063, -40.55621350929186],
+          [17.226412000000003, -40.556097741274996]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should ignore lng value when lat key is missing but latitude & longitude key exists", () => {
+        const coordinates = circleToPolygon(
+          {
+            lng: -40.556493,
+            latitude: -40.556493,
+            longitude: -17.226412
+          },
+          43,
+          7
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [-17.226412000000003, -40.55610672442783],
+          [-17.226809492933292, -40.55625216043891],
+          [-17.22690766799982, -40.55657895334195],
+          [-17.226632593875987, -40.55684102205519],
+          [-17.226191406124016, -40.55684102205519],
+          [-17.22591633200018, -40.55657895334195],
+          [-17.226014507066708, -40.55625216043891],
+          [-17.226412000000003, -40.55610672442783]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
       it("should give correct coordinates for point east of GMT, south of equator", () => {
         const coordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
           .coordinates[0];

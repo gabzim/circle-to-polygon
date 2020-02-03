@@ -133,7 +133,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ longitude: 120, lat: -32 }, 100, 32),
           Error,
-          "ERROR! Longitude has to be passed with key 'lon' or 'lng' when latiude is passed with key 'lat'"
+          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
         );
       });
 
@@ -141,7 +141,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lon: 120, latitude: -32 }, 100, 32),
           Error,
-          "ERROR! Latitude has to be passed with key 'lat' when longitude is passed with key 'lon' or 'lng'"
+          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
         );
       });
 
@@ -149,7 +149,23 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lng: 120, latitude: -32 }, 100, 32),
           Error,
-          "ERROR! Latitude has to be passed with key 'lat' when longitude is passed with key 'lon' or 'lng'"
+          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+        );
+      });
+
+      it("should not allow { latitude }", () => {
+        assert.throws(
+          () => circleToPolygon({ latitude: 120 }, 100, 32),
+          Error,
+          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+        );
+      });
+
+      it("should not allow { longitude }", () => {
+        assert.throws(
+          () => circleToPolygon({ latitude: 120 }, 100, 32),
+          Error,
+          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
         );
       });
     });

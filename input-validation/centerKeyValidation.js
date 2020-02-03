@@ -1,14 +1,18 @@
 exports.centerKeyValidation = function centerKeyValidation(center) {
-  if (
-    !(hasLngAndLatKey(center) ||
-    hasLonAndLatKey(center) ||
-    hasLongitudeAndLatitudeKey(center))
-  ) {
+  if (!hasCorrectKeyPair(center)) {
     throw new Error(
       "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
     );
   }
 };
+
+function hasCorrectKeyPair(center) {
+  return (
+    hasLngAndLatKey(center) ||
+    hasLonAndLatKey(center) ||
+    hasLongitudeAndLatitudeKey(center)
+  );
+}
 
 function hasLongitudeAndLatitudeKey(obj) {
   return objHasProp(obj, "longitude") && objHasProp(obj, "latitude");

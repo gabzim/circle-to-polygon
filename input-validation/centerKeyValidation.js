@@ -1,11 +1,19 @@
 exports.centerKeyValidation = function centerKeyValidation(center) {
-  if (objHasProp(center, "lat") && !hasLonOrLngKey(center)) {
+  if (
+    objHasProp(center, "lat") &&
+    !hasLonOrLngKey(center) &&
+    !hasLongitudeAndLatitudeKey(center)
+  ) {
     throw new Error(
       "ERROR! Longitude has to be passed with key 'lon' or 'lng' when latiude is passed with key 'lat'"
     );
   }
 
-  if (hasLonOrLngKey(center) && !objHasProp(center, "lat")) {
+  if (
+    hasLonOrLngKey(center) &&
+    !objHasProp(center, "lat") &&
+    !hasLongitudeAndLatitudeKey(center)
+  ) {
     throw new Error(
       "ERROR! Latitude has to be passed with key 'lat' when longitude is passed with key 'lon' or 'lng'"
     );
@@ -14,6 +22,10 @@ exports.centerKeyValidation = function centerKeyValidation(center) {
 
 function hasLonOrLngKey(obj) {
   return objHasProp(obj, "lon") || objHasProp(obj, "lng");
+}
+
+function hasLongitudeAndLatitudeKey(obj) {
+  return objHasProp(obj, "longitude") && objHasProp(obj, "latitude");
 }
 
 function objHasProp(obj, prop) {

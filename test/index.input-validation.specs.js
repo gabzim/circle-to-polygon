@@ -133,7 +133,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ longitude: 120, lat: -32 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -141,7 +141,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lat: -32 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -149,7 +149,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lon: 120, latitude: -32 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -157,7 +157,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lon: 120 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -165,7 +165,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lng: 120, latitude: -32 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -173,7 +173,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ lng: 120 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -181,7 +181,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ latitude: 120 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
 
@@ -189,7 +189,7 @@ describe("Input Validation Verification", () => {
         assert.throws(
           () => circleToPolygon({ latitude: 120 }, 100, 32),
           Error,
-          "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+          "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
         );
       });
     });

@@ -5,7 +5,7 @@ exports.centerKeyValidation = function centerKeyValidation(center) {
     hasLongitudeAndLatitudeKey(center))
   ) {
     throw new Error(
-      "ERROR! If passed as an object center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude'"
+      "ERROR! center argument have to have key-pair 'lat & log' or 'lat & lng' or 'latitude & longitude' IF passed as an object"
     );
   }
 };

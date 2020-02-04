@@ -26,11 +26,11 @@ function offset(c1, distance, bearing) {
   return [toDegrees(lon), toDegrees(lat)];
 }
 
-module.exports = function circleToPolygon(center, radius, numberOfSegments) {
-  var n = numberOfSegments ? numberOfSegments : 32;
+module.exports = function circleToPolygon(center, radius, options) {
+  var n = getNumberOfSegments(options);
 
   // validateInput() throws error on invalid input and do nothing on valid input
-  validateInput({ center, radius, numberOfSegments });
+  validateInput({ center, radius, numberOfSegments: n });
 
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
@@ -43,3 +43,13 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
     coordinates: [coordinates]
   };
 };
+
+function getNumberOfSegments(options) {
+  if (typeof options === undefined) {
+    return 32;
+  } else if (typeof options === "object") {
+    var numberOfSegments = options.numberOfSegments;
+    return numberOfSegments === undefined ? 32 : numberOfSegments;
+  }
+  return options;
+}

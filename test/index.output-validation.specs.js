@@ -329,4 +329,16 @@ describe("Output verification", () => {
       xit("test 2", () => {});
     });
   });
+
+  describe("Testing Different Options", () => {
+    it("should give same result when passing numberOfSegments as number or as object", () => {
+      const sentAsNumber = circleToPolygon([7.023961, 38.870996], 64, 23)
+        .coordinates[0];
+      const sentAsObject = circleToPolygon([7.023961, 38.870996], 64, {
+        numberOfSegments: 23
+      }).coordinates[0];
+
+      expect(sentAsObject).to.eql(sentAsNumber);
+    });
+  });
 });

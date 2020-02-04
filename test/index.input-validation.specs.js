@@ -119,6 +119,14 @@ describe("Input verification", () => {
       );
     });
 
+    it("should throw error if numberOfSegments values is zero", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 50, 0),
+        Error,
+        "ERROR! Number of segments has to be at least 3 but was: 0"
+      );
+    });
+
     it("should NOT throw error when numberOfSegments is undefined", () => {
       assert.doesNotThrow(
         () => circleToPolygon([-59.99029, -58.99029], 50),

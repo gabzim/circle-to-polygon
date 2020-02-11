@@ -1,7 +1,7 @@
 exports.validateNumberOfSegments = function validateNumberOfSegments(
   numberOfSegments
 ) {
-  if (typeof numberOfSegments !== "number" && numberOfSegments !== undefined) {
+  if (typeof numberOfSegments !== "number") {
     throw new Error(
       `ERROR! Number of segments has to be a number but was: ${typeof numberOfSegments}`
     );

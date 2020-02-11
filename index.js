@@ -45,7 +45,7 @@ module.exports = function circleToPolygon(center, radius, options) {
 };
 
 function getNumberOfSegments(options) {
-  if (typeof options === undefined) {
+  if (options === undefined) {
     return 32;
   } else if (typeof options === "object") {
     var numberOfSegments = options.numberOfSegments;

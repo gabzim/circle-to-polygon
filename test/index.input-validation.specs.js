@@ -161,7 +161,7 @@ describe("Input verification", () => {
       assert.throw(
         () => circleToPolygon([-59.99029, -58.99029], 3, [23]),
         Error,
-        "ERROR! Number of segments has to be a number but was: object"
+        "ERROR! Number of segments has to be a number but was: array"
       );
     });
 

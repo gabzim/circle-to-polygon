@@ -157,6 +157,14 @@ describe("Input verification", () => {
       );
     });
 
+    it("should throw error when numberOfSegments is an array", () => {
+      assert.throw(
+        () => circleToPolygon([-59.99029, -58.99029], 3, [23]),
+        Error,
+        "ERROR! Number of segments has to be a number but was: object"
+      );
+    });
+
     describe("On too low numberOfSegments value", () => {
       it("numberOfSegments is < 0", () => {
         assert.throws(

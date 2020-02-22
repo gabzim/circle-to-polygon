@@ -61,3 +61,13 @@ polygon:
                     [ -27.457588699999995, -58.98939168471588 ] ] ]
 */
 ```
+
+## Disclaimers
+
+- **Decimal values will not throw error for numberOfEdges!** Instead one of the edges of the polygon will be smaller than the others. In other words, all edges will not have the same length if a decimal number is passed as numberOfEdges.
+- A circle whoes edge cross longitude edges (-180 or 180) or a latitude edge (-90 or 90) will contain coordinate points that are outside the stanardized coordinates (eg: [182, 23]). This is because there are two ways to represent a line going from [179, x] to [181, y]. One way is simply writing it as [[179, x], [182, y]] while the other is to write it as a multi-polygon. Version <= 2.0.x does only support the first way while release of 2.1.0 will support multi-polygons as well.
+
+## Authors
+
+- Gabriel Zimmermann
+- Johannes Jarbratt

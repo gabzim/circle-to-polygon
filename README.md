@@ -12,6 +12,8 @@ or
 
 ## Usage
 
+### Example
+
 ```javascript
 const circleToPolygon = require('circle-to-polygon');
 
@@ -62,6 +64,15 @@ polygon:
 */
 ```
 
+### Parameters
+
+- `coordinates` **[Array][arraydef]** of length 2 or 3 **\*required**
+  - First Element: `longitude` **[Number][numberdef]** **\*required**, can be any number `<=180` and `>=-180`
+  - Second Element: `latitude` **[Number][numberdef]** **\*required**, can be any number `<=90 `and `>=-90`
+  - Third Element: Ignored if present
+- `radius` **[Number][numberdef]** **\*required**, can be any number `>0`
+- `numberOfEdges` **[Number][numberdef]** can be any number `>=3`, defaults to 32 when undefined
+
 ## Disclaimers
 
 - **Decimal values will not throw error for numberOfEdges!** Instead one of the edges of the polygon will be smaller than the others. In other words, all edges will not have the same length if a decimal number is passed as numberOfEdges.
@@ -75,3 +86,6 @@ polygon:
 ## License
 
 [ISC](./LICENSE.txt)
+
+[arraydef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[numberdef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

@@ -71,3 +71,7 @@ polygon:
 
 - Gabriel Zimmermann
 - Johannes Jarbratt
+
+## License
+
+[ISC](./LICENSE.txt)

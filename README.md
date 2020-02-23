@@ -12,6 +12,8 @@ or
 
 ## Usage
 
+### Example
+
 ```javascript
 const circleToPolygon = require('circle-to-polygon');
 
@@ -61,3 +63,29 @@ polygon:
                     [ -27.457588699999995, -58.98939168471588 ] ] ]
 */
 ```
+
+### Parameters
+
+- `coordinates` **[Array][arraydef]** of length 2 or 3 **\*required**
+  - First Element: `longitude` **[Number][numberdef]** **\*required**, can be any number `<=180` and `>=-180`
+  - Second Element: `latitude` **[Number][numberdef]** **\*required**, can be any number `<=90 `and `>=-90`
+  - Third Element: Ignored if present
+- `radius` **[Number][numberdef]** **\*required**, can be any number `>0`
+- `numberOfEdges` **[Number][numberdef]** can be any number `>=3`, defaults to 32 when undefined
+
+## Disclaimers
+
+- **Decimal values will not throw error for numberOfEdges!** Instead one of the edges of the polygon will be smaller than the others. In other words, all edges will not have the same length if a decimal number is passed as numberOfEdges.
+- A circle whoes edge cross longitude edges (-180 or 180) or a latitude edge (-90 or 90) will contain coordinate points that are outside the stanardized coordinates (eg: [182, 23]). This is because there are two ways to represent a line going from [179, x] to [181, y]. One way is simply writing it as [[179, x], [182, y]] while the other is to write it as a multi-polygon. Version <= 2.0.x does only support the first way while release of 2.1.0 will support multi-polygons as well.
+
+## Authors
+
+- Gabriel Zimmermann
+- Johannes Jarbratt
+
+## License
+
+[ISC](./LICENSE.txt)
+
+[arraydef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[numberdef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

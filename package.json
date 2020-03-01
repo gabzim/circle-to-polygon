@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/gabzim/circle-to-radius.git"
+    "url": "git+ssh://git@github.com/gabzim/circle-to-polygon.git"
   },
   "keywords": [
     "GeoJSON",
@@ -18,9 +18,9 @@
   "author": "Gabriel Zimmermann & Johannes Jarbratt",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gabzim/circle-to-radius/issues"
+    "url": "https://github.com/gabzim/circle-to-polygon/issues"
   },
-  "homepage": "https://github.com/gabzim/circle-to-radius#readme",
+  "homepage": "https://github.com/gabzim/circle-to-polygon#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.2.2"

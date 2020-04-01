@@ -25,7 +25,7 @@ function offset(c1, distance, bearing) {
 }
 
 function validateCenter(center) {
-  const validCenterLengths = [2, 3]
+  const validCenterLengths = [2, 3];
   if (!Array.isArray(center) || !validCenterLengths.includes(center.length)) {
     throw new Error("ERROR! Center has to be an array of length two or three");
   }

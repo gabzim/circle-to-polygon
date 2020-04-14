@@ -3,6 +3,7 @@
   "version": "2.0.2",
   "description": "Receives a Coordinate, a Radius and a Number of edges and aproximates a circle by creating a polygon that fills its area",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha ./**/*specs.js"
   },
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/gabzim/circle-to-polygon#readme",
   "devDependencies": {
+    "@types/geojson": "^7946.0.7",
     "chai": "^4.2.0",
     "mocha": "^6.2.2"
   }

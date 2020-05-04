@@ -1,4 +1,6 @@
 "use strict";
+var { validateInput } = require("./input-validation");
+
 function toRadians(angleInDegrees) {
   return (angleInDegrees * Math.PI) / 180;
 }
@@ -22,64 +24,6 @@ function offset(c1, distance, bearing) {
       Math.cos(dByR) - Math.sin(lat1) * Math.sin(lat)
     );
   return [toDegrees(lon), toDegrees(lat)];
-}
-
-function validateCenter(center) {
-  const validCenterLengths = [2, 3];
-  if (!Array.isArray(center) || !validCenterLengths.includes(center.length)) {
-    throw new Error("ERROR! Center has to be an array of length two or three");
-  }
-  const [lng, lat] = center;
-  if (typeof lng !== "number" || typeof lat !== "number") {
-    throw new Error(
-      `ERROR! Longitude and Latitude has to be numbers but where ${typeof lng} and ${typeof lat}`
-    );
-  }
-  if (lng > 180 || lng < -180) {
-    throw new Error(
-      `ERROR! Longitude has to be between -180 and 180 but was ${lng}`
-    );
-  }
-
-  if (lat > 90 || lat < -90) {
-    throw new Error(
-      `ERROR! Latitude has to be between -90 and 90 but was ${lat}`
-    );
-  }
-}
-
-function validateRadius(radius) {
-  if (typeof radius !== "number") {
-    throw new Error(
-      `ERROR! Radius has to be a positive number but was: ${typeof radius}`
-    );
-  }
-
-  if (radius <= 0) {
-    throw new Error(
-      `ERROR! Radius has to be a positive number but was: ${radius}`
-    );
-  }
-}
-
-function validateNumberOfSegments(numberOfSegments) {
-  if (typeof numberOfSegments !== "number" && numberOfSegments !== undefined) {
-    throw new Error(
-      `ERROR! Number of segments has to be a number but was: ${typeof numberOfSegments}`
-    );
-  }
-
-  if (numberOfSegments < 3) {
-    throw new Error(
-      `ERROR! Number of segments has to be at least 3 but was: ${numberOfSegments}`
-    );
-  }
-}
-
-function validateInput({ center, radius, numberOfSegments }) {
-  validateCenter(center);
-  validateRadius(radius);
-  validateNumberOfSegments(numberOfSegments);
 }
 
 module.exports = function circleToPolygon(center, radius, numberOfSegments) {

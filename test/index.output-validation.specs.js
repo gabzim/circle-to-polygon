@@ -154,11 +154,11 @@ describe("Output verification", () => {
         });
       });
 
-      it("should give same value when numberOfSegemnts is { numberOfSegments: undefined } or 32", () => {
+      it("should give same value when numberOfSegemnts is { numberOfEdges: undefined } or 32", () => {
         const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
           .coordinates[0];
         const coordinates = circleToPolygon([131.034184, -25.343467], 5000, {
-          numberOfSegments: undefined
+          numberOfEdges: undefined
         }).coordinates[0];
 
         coordinates.forEach((cord, cordIndex) => {
@@ -352,10 +352,10 @@ describe("Output verification", () => {
   });
 
   describe("Testing Different Options", () => {
-    it("should give same result when passing numberOfSegments as number or as object", () => {
+    it("should give same result when passing numberOfEdges as number or as object", () => {
       const sentAsNumber = circleToPolygon([7.023961, 38.870996], 64, 23).coordinates[0];
       const sentAsObject = circleToPolygon([7.023961, 38.870996], 64, {
-        numberOfSegments: 23
+        numberOfEdges: 23
       }).coordinates[0];
 
       expect(sentAsObject).to.eql(sentAsNumber);

@@ -110,79 +110,79 @@ describe("Input verification", () => {
     });
   });
 
-  describe("Validating number of segments input", () => {
-    it("should throw error on invalid numberOfSegments values", () => {
+  describe("Validating number of edges input", () => {
+    it("should throw error on invalid numberOfEdges values", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 50, -1),
         Error,
-        "ERROR! Number of segments has to be at least 3 but was: -1"
+        "ERROR! Number of edges has to be at least 3 but was: -1"
       );
     });
 
-    it("should throw error if numberOfSegments values is zero", () => {
+    it("should throw error if numberOfEdges values is zero", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 50, 0),
         Error,
-        "ERROR! Number of segments has to be at least 3 but was: 0"
+        "ERROR! Number of edges has to be at least 3 but was: 0"
       );
     });
 
-    it("should NOT throw error when numberOfSegments is undefined", () => {
+    it("should NOT throw error when numberOfEdges is undefined", () => {
       assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 50), Error);
     });
 
-    it("should NOT throw error when numberOfSegments >= 3", () => {
+    it("should NOT throw error when numberOfEdges >= 3", () => {
       assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 3), Error);
       assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 32), Error);
       assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 500), Error);
     });
 
-    it("should throw error when numberOfSegments is a function", () => {
+    it("should throw error when numberOfEdges is a function", () => {
       assert.throw(
         () => circleToPolygon([-59.99029, -58.99029], 3, function () {}),
         Error,
-        "ERROR! Number of segments has to be a number but was: function"
+        "ERROR! Number of edges has to be a number but was: function"
       );
     });
 
-    it("should throw error when numberOfSegments is an array", () => {
+    it("should throw error when numberOfEdges is an array", () => {
       assert.throw(
         () => circleToPolygon([-59.99029, -58.99029], 3, [23]),
         Error,
-        "ERROR! Number of segments has to be a number but was: array"
+        "ERROR! Number of edges has to be a number but was: array"
       );
     });
 
-    describe("On too low numberOfSegments value", () => {
-      it("numberOfSegments is < 0", () => {
+    describe("On too low numberOfEdges value", () => {
+      it("numberOfEdges is < 0", () => {
         assert.throws(
           () => circleToPolygon([-59.99029, -58.99029], 50, -10),
           Error,
-          "ERROR! Number of segments has to be at least 3 but was: -10"
+          "ERROR! Number of edges has to be at least 3 but was: -10"
         );
       });
 
-      it("numberOfSegments is zero (0)", () => {
+      it("numberOfEdges is zero (0)", () => {
         assert.throws(
           () => circleToPolygon([-59.99029, -58.99029], 50, 0),
           Error,
-          "ERROR! Number of segments has to be at least 3 but was: 0"
+          "ERROR! Number of edges has to be at least 3 but was: 0"
         );
       });
 
-      it("numberOfSegments is one (1)", () => {
+      it("numberOfEdges is one (1)", () => {
         assert.throws(
           () => circleToPolygon([-59.99029, -58.99029], 50, 1),
           Error,
-          "ERROR! Number of segments has to be at least 3 but was: 1"
+          "ERROR! Number of edges has to be at least 3 but was: 1"
         );
       });
 
-      it("numberOfSegments is 2 (2)", () => {
+      it("numberOfEdges is 2 (2)", () => {
         assert.throws(
           () => circleToPolygon([-59.99029, -58.99029], 50, 2),
           Error,
-          "ERROR! Number of segments has to be at least 3 but was: 2"
+          "ERROR! Number of edges has to be at least 3 but was: 2"
         );
       });
     });

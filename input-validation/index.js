@@ -1,14 +1,14 @@
 var validateCenter = require("./validateCenter").validateCenter;
 var validateRadius = require("./validateRadius").validateRadius;
-var validateNumberOfSegments = require("./validateNumberOfSegments").validateNumberOfSegments;
+var validateNumberOfEdges = require("./validateNumberOfEdges").validateNumberOfEdges;
 
-function validateInput({ center, radius, numberOfSegments }) {
+function validateInput({ center, radius, numberOfEdges }) {
   validateCenter(center);
   validateRadius(radius);
-  validateNumberOfSegments(numberOfSegments);
+  validateNumberOfEdges(numberOfEdges);
 }
 
 exports.validateCenter = validateCenter;
 exports.validateRadius = validateRadius;
-exports.validateNumberOfSegments = validateNumberOfSegments;
+exports.validateNumberOfEdges = validateNumberOfEdges;
 exports.validateInput = validateInput;

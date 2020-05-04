@@ -14,8 +14,7 @@ function offset(c1, distance, bearing) {
   var lon1 = toRadians(c1[0]);
   var dByR = distance / 6378137; // distance divided by 6378137 (radius of the earth) wgs84
   var lat = Math.asin(
-    Math.sin(lat1) * Math.cos(dByR) +
-      Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
+    Math.sin(lat1) * Math.cos(dByR) + Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
   );
   var lon =
     lon1 +
@@ -55,5 +54,5 @@ function getNumberOfSegments(options) {
 }
 
 function isObjectNotArray(argument) {
-  return typeof argument === "object" && !Array.isArray(argument)
+  return typeof argument === "object" && !Array.isArray(argument);
 }

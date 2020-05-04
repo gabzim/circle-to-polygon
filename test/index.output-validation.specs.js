@@ -42,8 +42,7 @@ describe("Output verification", () => {
     */
     describe("Testing trivial points", () => {
       it("should give correct coordinates for point east of GMT, north of equator", () => {
-        const coordinates = circleToPolygon([16.226412, 58.556493], 138, 10)
-          .coordinates[0];
+        const coordinates = circleToPolygon([16.226412, 58.556493], 138, 10).coordinates[0];
 
         const expectedCoordinates = [
           [16.226412, 58.557732],
@@ -95,8 +94,7 @@ describe("Output verification", () => {
       });
 
       it("should give correct coordinates for point east of GMT, south of equator", () => {
-        const coordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
-          .coordinates[0];
+        const coordinates = circleToPolygon([131.034184, -25.343467], 5000, 32).coordinates[0];
 
         const expectedCoordinates = [
           [131.034184, -25.298551],
@@ -144,12 +142,9 @@ describe("Output verification", () => {
 
       it("should give same value when numberOfSegemnts is undefined or 32", () => {
         const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
-        .coordinates[0];
-        const coordinates = circleToPolygon(
-          [131.034184, -25.343467],
-          5000,
-          undefined
-        ).coordinates[0];
+          .coordinates[0];
+        const coordinates = circleToPolygon([131.034184, -25.343467], 5000, undefined)
+          .coordinates[0];
 
         coordinates.forEach((cord, cordIndex) => {
           cord.forEach((value, valueIndex) => {
@@ -161,12 +156,10 @@ describe("Output verification", () => {
 
       it("should give same value when numberOfSegemnts is { numberOfSegments: undefined } or 32", () => {
         const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
-        .coordinates[0];
-        const coordinates = circleToPolygon(
-          [131.034184, -25.343467],
-          5000,
-          { numberOfSegments: undefined }
-        ).coordinates[0];
+          .coordinates[0];
+        const coordinates = circleToPolygon([131.034184, -25.343467], 5000, {
+          numberOfSegments: undefined
+        }).coordinates[0];
 
         coordinates.forEach((cord, cordIndex) => {
           cord.forEach((value, valueIndex) => {
@@ -177,8 +170,7 @@ describe("Output verification", () => {
       });
 
       it("should give correct coordinates for point west of GMT, north of equator", () => {
-        const coordinates = circleToPolygon([-121.003331, 66.001764], 50000, 64)
-          .coordinates[0];
+        const coordinates = circleToPolygon([-121.003331, 66.001764], 50000, 64).coordinates[0];
 
         const expectedCoordinates = [
           [-121.003331, 66.450921],
@@ -257,11 +249,7 @@ describe("Output verification", () => {
       });
 
       it("should give correct coordinates for point west of GMT, south of equator", () => {
-        const coordinates = circleToPolygon(
-          [-75.1299566, -14.7391814],
-          5000,
-          12
-        ).coordinates[0];
+        const coordinates = circleToPolygon([-75.1299566, -14.7391814], 5000, 12).coordinates[0];
 
         const expectedCoordinates = [
           [-75.129956, -14.694265],
@@ -289,8 +277,7 @@ describe("Output verification", () => {
 
       it("should pass the pentagon test", () => {
         // A pentagon on Pentagon, Virginia
-        const coordinates = circleToPolygon([-77.055961, 38.870996], 200, 5)
-          .coordinates[0];
+        const coordinates = circleToPolygon([-77.055961, 38.870996], 200, 5).coordinates[0];
 
         const expectedCoordinates = [
           [-77.055961, 38.872792],
@@ -366,8 +353,7 @@ describe("Output verification", () => {
 
   describe("Testing Different Options", () => {
     it("should give same result when passing numberOfSegments as number or as object", () => {
-      const sentAsNumber = circleToPolygon([7.023961, 38.870996], 64, 23)
-        .coordinates[0];
+      const sentAsNumber = circleToPolygon([7.023961, 38.870996], 64, 23).coordinates[0];
       const sentAsObject = circleToPolygon([7.023961, 38.870996], 64, {
         numberOfSegments: 23
       }).coordinates[0];

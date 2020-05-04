@@ -128,30 +128,18 @@ describe("Input verification", () => {
     });
 
     it("should NOT throw error when numberOfSegments is undefined", () => {
-      assert.doesNotThrow(
-        () => circleToPolygon([-59.99029, -58.99029], 50),
-        Error
-      );
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 50), Error);
     });
 
     it("should NOT throw error when numberOfSegments >= 3", () => {
-      assert.doesNotThrow(
-        () => circleToPolygon([-59.99029, -58.99029], 3),
-        Error
-      );
-      assert.doesNotThrow(
-        () => circleToPolygon([-59.99029, -58.99029], 32),
-        Error
-      );
-      assert.doesNotThrow(
-        () => circleToPolygon([-59.99029, -58.99029], 500),
-        Error
-      );
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 3), Error);
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 32), Error);
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 500), Error);
     });
 
     it("should throw error when numberOfSegments is a function", () => {
       assert.throw(
-        () => circleToPolygon([-59.99029, -58.99029], 3, function(){}),
+        () => circleToPolygon([-59.99029, -58.99029], 3, function () {}),
         Error,
         "ERROR! Number of segments has to be a number but was: function"
       );
@@ -181,7 +169,7 @@ describe("Input verification", () => {
           "ERROR! Number of segments has to be at least 3 but was: 0"
         );
       });
-  
+
       it("numberOfSegments is one (1)", () => {
         assert.throws(
           () => circleToPolygon([-59.99029, -58.99029], 50, 1),
@@ -197,6 +185,6 @@ describe("Input verification", () => {
           "ERROR! Number of segments has to be at least 3 but was: 2"
         );
       });
-    })
+    });
   });
 });

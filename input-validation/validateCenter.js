@@ -11,14 +11,10 @@ exports.validateCenter = function validateCenter(center) {
     );
   }
   if (lng > 180 || lng < -180) {
-    throw new Error(
-      `ERROR! Longitude has to be between -180 and 180 but was ${lng}`
-    );
+    throw new Error(`ERROR! Longitude has to be between -180 and 180 but was ${lng}`);
   }
 
   if (lat > 90 || lat < -90) {
-    throw new Error(
-      `ERROR! Latitude has to be between -90 and 90 but was ${lat}`
-    );
+    throw new Error(`ERROR! Latitude has to be between -90 and 90 but was ${lat}`);
   }
 };

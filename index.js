@@ -14,8 +14,7 @@ function offset(c1, distance, bearing) {
   var lon1 = toRadians(c1[0]);
   var dByR = distance / 6378137; // distance divided by 6378137 (radius of the earth) wgs84
   var lat = Math.asin(
-    Math.sin(lat1) * Math.cos(dByR) +
-      Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
+    Math.sin(lat1) * Math.cos(dByR) + Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
   );
   var lon =
     lon1 +
@@ -26,11 +25,11 @@ function offset(c1, distance, bearing) {
   return [toDegrees(lon), toDegrees(lat)];
 }
 
-module.exports = function circleToPolygon(center, radius, numberOfSegments) {
-  var n = numberOfSegments ? numberOfSegments : 32;
+module.exports = function circleToPolygon(center, radius, options) {
+  var n = getNumberOfEdges(options);
 
   // validateInput() throws error on invalid input and do nothing on valid input
-  validateInput({ center, radius, numberOfSegments });
+  validateInput({ center, radius, numberOfEdges: n });
 
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
@@ -43,3 +42,17 @@ module.exports = function circleToPolygon(center, radius, numberOfSegments) {
     coordinates: [coordinates]
   };
 };
+
+function getNumberOfEdges(options) {
+  if (options === undefined) {
+    return 32;
+  } else if (isObjectNotArray(options)) {
+    var numberOfEdges = options.numberOfEdges;
+    return numberOfEdges === undefined ? 32 : numberOfEdges;
+  }
+  return options;
+}
+
+function isObjectNotArray(argument) {
+  return typeof argument === "object" && !Array.isArray(argument);
+}

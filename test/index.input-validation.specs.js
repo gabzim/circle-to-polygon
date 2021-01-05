@@ -233,4 +233,30 @@ describe("Input verification", () => {
       );
     });
   });
+
+  describe("Validating bearing input", () => {
+    it("should NOT throw error when bearing is undefined", () => {
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 100), Error);
+    });
+
+    it("should NOT throw error when bearing is a number", () => {
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 100, { bearing: 180 }), Error);
+    });
+
+    it("should throw error when bearing is a function", () => {
+      assert.throw(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { bearing: function () {} }),
+        Error,
+        "ERROR! Bearing has to be a number but was: function"
+      );
+    });
+
+    it("should throw error when bearing is an array", () => {
+      assert.throw(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { bearing: [23] }),
+        Error,
+        "ERROR! Bearing has to be a number but was: array"
+      );
+    });
+  });
 });

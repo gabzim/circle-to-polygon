@@ -73,13 +73,13 @@ describe("Output verification", () => {
           [0, 0.000116],
           [-0.000058, 0.000101],
           [-0.000101, 0.000058],
-          [-0.000116, -2.145231e-20],
+          [-0.000116, 0],
           [-0.000101, -0.000058],
           [-0.000058, -0.000101],
-          [1.430154e-20, -0.000116],
+          [0, -0.000116],
           [0.000058, -0.000101],
           [0.000101, -0.000058],
-          [0.000116, 7.150773e-21],
+          [0.000116, 0],
           [0.000101, 0.000058],
           [0.000058, 0.000101],
           [0, 0.000116]
@@ -303,16 +303,70 @@ describe("Output verification", () => {
           [0, 0.000116],
           [-0.000058, 0.000101],
           [-0.000101, 0.000058],
-          [-0.000116, -2.145231e-20],
+          [-0.000116, 0],
           [-0.000101, -0.000058],
           [-0.000058, -0.000101],
-          [1.430154e-20, -0.000116],
+          [0, -0.000116],
           [0.000058, -0.000101],
           [0.000101, -0.000058],
-          [0.000116, 7.150773e-21],
+          [0.000116, 0],
           [0.000101, 0.000058],
           [0.000058, 0.000101],
           [0, 0.000116]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should give correct coordinates for center in [0, 0] and equatorial Earth radius", () => {
+        const coordinates = circleToPolygon([0, 0], 1000000, { numberOfEdges: 12, earthRadius: 6378137 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [ 0, 8.983152 ],
+          [ -4.519349, 7.771613 ],
+          [ -7.795555, 4.477753 ],
+          [ -8.983152, 0 ],
+          [ -7.795555, -4.477753 ],
+          [ -4.519349, -7.771613 ],
+          [ 0, -8.983152 ],
+          [ 4.519349, -7.771613 ],
+          [ 7.795555, -4.477753 ],
+          [ 8.983152, 0 ],
+          [ 7.795555, 4.477753 ],
+          [ 4.519349, 7.771613 ],
+          [ 0, 8.983152 ]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should give correct coordinates for center in [0, 0] and mean Earth radius", () => {
+        const coordinates = circleToPolygon([0, 0], 1000000, { numberOfEdges: 12, earthRadius: 6371008.8 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [ 0, 8.993203 ],
+          [ -4.524468, 7.780290 ],
+          [ -7.804312, 4.482732 ],
+          [ -8.993203, 0 ],
+          [ -7.804312, -4.482732 ],
+          [ -4.524468, -7.780290 ],
+          [ 0, -8.993203 ],
+          [ 4.524468, -7.780290 ],
+          [ 7.804312, -4.482732 ],
+          [ 8.993203, 0 ],
+          [ 7.804312, 4.482732 ],
+          [ 4.524468, 7.780290 ],
+          [ 0, 8.993203 ]
         ];
 
         coordinates.forEach((cord, cordIndex) => {

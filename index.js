@@ -1,6 +1,8 @@
 "use strict";
 var { validateInput } = require("./input-validation");
 
+const defaultEarthRadius = 6378137; // equatorial Earth radius
+
 function toRadians(angleInDegrees) {
   return (angleInDegrees * Math.PI) / 180;
 }
@@ -9,10 +11,10 @@ function toDegrees(angleInRadians) {
   return (angleInRadians * 180) / Math.PI;
 }
 
-function offset(c1, distance, bearing) {
+function offset(c1, distance, earthRadius, bearing) {
   var lat1 = toRadians(c1[1]);
   var lon1 = toRadians(c1[0]);
-  var dByR = distance / 6378137; // distance divided by 6378137 (radius of the earth) wgs84
+  var dByR = distance / earthRadius;
   var lat = Math.asin(
     Math.sin(lat1) * Math.cos(dByR) + Math.cos(lat1) * Math.sin(dByR) * Math.cos(bearing)
   );
@@ -27,13 +29,14 @@ function offset(c1, distance, bearing) {
 
 module.exports = function circleToPolygon(center, radius, options) {
   var n = getNumberOfEdges(options);
+  var earthRadius = getEarthRadius(options);
 
   // validateInput() throws error on invalid input and do nothing on valid input
-  validateInput({ center, radius, numberOfEdges: n });
+  validateInput({ center, radius, numberOfEdges: n, earthRadius });
 
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
-    coordinates.push(offset(center, radius, (2 * Math.PI * -i) / n));
+    coordinates.push(offset(center, radius, earthRadius, (2 * Math.PI * -i) / n));
   }
   coordinates.push(coordinates[0]);
 
@@ -51,6 +54,16 @@ function getNumberOfEdges(options) {
     return numberOfEdges === undefined ? 32 : numberOfEdges;
   }
   return options;
+}
+
+function getEarthRadius(options) {
+  if (options === undefined) {
+    return defaultEarthRadius;
+  } else if (isObjectNotArray(options)) {
+    var earthRadius = options.earthRadius;
+    return earthRadius === undefined ? defaultEarthRadius : earthRadius;
+  }
+  return defaultEarthRadius;
 }
 
 function isObjectNotArray(argument) {

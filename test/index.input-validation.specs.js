@@ -187,4 +187,50 @@ describe("Input verification", () => {
       });
     });
   });
+
+  describe("Validating earthRadius input", () => {
+    it("should NOT throw error when earthRadius is undefined", () => {
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 100), Error);
+    });
+
+    it("should NOT throw error when earthRadius is a number", () => {
+      assert.doesNotThrow(() => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: 6371000 }), Error);
+    });
+
+    it("should throw error when earthRadius is a function", () => {
+      assert.throw(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: function () {} }),
+        Error,
+        "ERROR! Earth radius has to be a number but was: function"
+      );
+    });
+
+    it("should throw error when earthRadius is an array", () => {
+      assert.throw(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: [23] }),
+        Error,
+        "ERROR! Earth radius has to be a number but was: array"
+      );
+    });
+
+    it("should throw error on too smal earthRadius value", () => {
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: 0 }),
+        Error,
+        `ERROR! Earth radius has to be a positive number but was: 0`
+      );
+
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: -1 }),
+        Error,
+        `ERROR! Earth radius has to be a positive number but was: -1`
+      );
+
+      assert.throws(
+        () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: -10 }),
+        Error,
+        `ERROR! Earth radius has to be a positive number but was: -10`
+      );
+    });
+  });
 });

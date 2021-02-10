@@ -73,6 +73,7 @@ polygon:
 - `radius` **[Number][numberdef]** **\*required**, can be any number `>0`
 - `numberOfEdges` **[Number][numberdef]** can be any number `>=3`, defaults to 32 when undefined
 - `earthRadius` **[Number][numberdef]** can be any number `>0`, defaults to 6378137 (equatorial Earth radius) when undefined
+- `bearing` **[Number][numberdef]** can be any number, defaults to 0 when undefined
 
 ## Disclaimers
 

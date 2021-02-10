@@ -30,13 +30,15 @@ function offset(c1, distance, earthRadius, bearing) {
 module.exports = function circleToPolygon(center, radius, options) {
   var n = getNumberOfEdges(options);
   var earthRadius = getEarthRadius(options);
+  var bearing = getBearing(options);
 
   // validateInput() throws error on invalid input and do nothing on valid input
-  validateInput({ center, radius, numberOfEdges: n, earthRadius });
+  validateInput({ center, radius, numberOfEdges: n, earthRadius, bearing });
 
+  var start = toRadians(bearing);
   var coordinates = [];
   for (var i = 0; i < n; ++i) {
-    coordinates.push(offset(center, radius, earthRadius, (2 * Math.PI * -i) / n));
+    coordinates.push(offset(center, radius, earthRadius, start + (2 * Math.PI * -i) / n));
   }
   coordinates.push(coordinates[0]);
 
@@ -64,6 +66,16 @@ function getEarthRadius(options) {
     return earthRadius === undefined ? defaultEarthRadius : earthRadius;
   }
   return defaultEarthRadius;
+}
+
+function getBearing(options) {
+  if (options === undefined) {
+    return 0;
+  } else if (isObjectNotArray(options)) {
+    var bearing = options.bearing;
+    return bearing === undefined ? 0 : bearing;
+  }
+  return 0;
 }
 
 function isObjectNotArray(argument) {

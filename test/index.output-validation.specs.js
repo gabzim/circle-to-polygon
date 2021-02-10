@@ -376,6 +376,114 @@ describe("Output verification", () => {
           });
         });
       });
+
+      it("should give rotated coordinates for bearing 90", () => {
+        const coordinates = circleToPolygon([0, 0], 13, { numberOfEdges: 12, bearing: 90 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [0.000116, 0],
+          [0.000101, 0.000058],
+          [0.000058, 0.000101],
+          [0, 0.000116],
+          [-0.000058, 0.000101],
+          [-0.000101, 0.000058],
+          [-0.000116, 0],
+          [-0.000101, -0.000058],
+          [-0.000058, -0.000101],
+          [0, -0.000116],
+          [0.000058, -0.000101],
+          [0.000101, -0.000058],
+          [0.000116, 0]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should give rotated coordinates for bearing 180", () => {
+        const coordinates = circleToPolygon([0, 0], 13, { numberOfEdges: 12, bearing: 180 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [0, -0.000116],
+          [0.000058, -0.000101],
+          [0.000101, -0.000058],
+          [0.000116, 0],
+          [0.000101, 0.000058],
+          [0.000058, 0.000101],
+          [0, 0.000116],
+          [-0.000058, 0.000101],
+          [-0.000101, 0.000058],
+          [-0.000116, 0],
+          [-0.000101, -0.000058],
+          [-0.000058, -0.000101],
+          [0, -0.000116]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should give rotated coordinates for bearing 270", () => {
+        const coordinates = circleToPolygon([0, 0], 13, { numberOfEdges: 12, bearing: 270 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [-0.000116, 0],
+          [-0.000101, -0.000058],
+          [-0.000058, -0.000101],
+          [0, -0.000116],
+          [0.000058, -0.000101],
+          [0.000101, -0.000058],
+          [0.000116, 0],
+          [0.000101, 0.000058],
+          [0.000058, 0.000101],
+          [0, 0.000116],
+          [-0.000058, 0.000101],
+          [-0.000101, 0.000058],
+          [-0.000116, 0]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("should give rotated coordinates for bearing 45", () => {
+        const coordinates = circleToPolygon([0, 0], 13, { numberOfEdges: 12, bearing: 45 }).coordinates[0];
+
+        const expectedCoordinates = [
+          [ 0.000082, 0.000082 ],
+          [ 0.000030, 0.000112 ],
+          [ -0.000030, 0.000112 ],
+          [ -0.000082, 0.000082 ],
+          [ -0.000112, 0.000030 ],
+          [ -0.000112, -0.000030 ],
+          [ -0.000082, -0.000082 ],
+          [ -0.000030, -0.000112 ],
+          [ 0.000030, -0.000112 ],
+          [ 0.000082, -0.000082 ],
+          [ 0.000112, -0.000030 ],
+          [ 0.000112, 0.000030 ],
+          [ 0.000082, 0.000082 ]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
     });
 
     describe("Testing non-trivial points", () => {

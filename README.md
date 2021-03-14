@@ -15,11 +15,11 @@ or
 ### Example
 
 ```javascript
-const circleToPolygon = require('circle-to-polygon');
+const circleToPolygon = require("circle-to-polygon");
 
 const coordinates = [-27.4575887, -58.99029]; //[lon, lat]
-const radius = 100;                           // in meters
-const numberOfEdges = 32;                     //optional that defaults to 32
+const radius = 100; // in meters
+const numberOfEdges = 32; //optional that defaults to 32
 
 let polygon = circleToPolygon(coordinates, radius, numberOfEdges);
 
@@ -84,6 +84,10 @@ polygon:
 
 - Gabriel Zimmermann
 - Johannes Jarbratt
+
+## Contributors
+
+- Jan Žák
 
 ## License
 

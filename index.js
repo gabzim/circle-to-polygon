@@ -79,5 +79,6 @@ function getBearing(options) {
 }
 
 function isObjectNotArray(argument) {
-  return typeof argument === "object" && !Array.isArray(argument);
+  return argument !== null && typeof argument === "object" && !Array.isArray(argument);
+}
 }

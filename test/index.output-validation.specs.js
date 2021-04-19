@@ -523,4 +523,10 @@ describe("Output verification", () => {
       expect(sentAsObject).to.eql(sentAsNumber);
     });
   });
+
+  describe("This test should fail so we know that Github Action works", () => {
+    it("say that `false` is `true`", () => {
+      expect(false).to.be.true
+    })
+  })
 });

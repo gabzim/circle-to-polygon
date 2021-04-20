@@ -74,7 +74,7 @@ function getEarthRadius(options) {
 }
 
 function getDirection(options){
-  if (isObjectNotArray(options) && options.rightHandRule === true){
+  if (isObjectNotArray(options) && options.rightHandRule){
     return -1;
   }
   return 1;

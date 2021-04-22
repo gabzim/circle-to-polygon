@@ -169,6 +169,19 @@ describe("Output verification", () => {
         });
       });
 
+      it("should give same value when options is null as when undefined", () => {
+        const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
+          .coordinates[0];
+        const coordinates = circleToPolygon([131.034184, -25.343467], 5000, null).coordinates[0];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
       it("should give correct coordinates for point west of GMT, north of equator", () => {
         const coordinates = circleToPolygon([-121.003331, 66.001764], 50000, 64).coordinates[0];
 

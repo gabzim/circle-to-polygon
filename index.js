@@ -54,7 +54,7 @@ module.exports = function circleToPolygon(center, radius, options) {
 };
 
 function getNumberOfEdges(options) {
-  if (options === undefined) {
+  if (isUndefinedOrNull(options)) {
     return 32;
   } else if (isObjectNotArray(options)) {
     var numberOfEdges = options.numberOfEdges;
@@ -64,7 +64,7 @@ function getNumberOfEdges(options) {
 }
 
 function getEarthRadius(options) {
-  if (options === undefined) {
+  if (isUndefinedOrNull(options)) {
     return defaultEarthRadius;
   } else if (isObjectNotArray(options)) {
     var earthRadius = options.earthRadius;
@@ -81,7 +81,7 @@ function getDirection(options){
 }
 
 function getBearing(options) {
-  if (options === undefined) {
+  if (isUndefinedOrNull(options)) {
     return 0;
   } else if (isObjectNotArray(options)) {
     var bearing = options.bearing;
@@ -91,5 +91,9 @@ function getBearing(options) {
 }
 
 function isObjectNotArray(argument) {
-  return typeof argument === "object" && !Array.isArray(argument);
+  return argument !== null && typeof argument === "object" && !Array.isArray(argument);
+}
+
+function isUndefinedOrNull(argument) {
+  return argument === null || argument === undefined;
 }

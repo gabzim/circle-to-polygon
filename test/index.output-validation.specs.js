@@ -499,7 +499,7 @@ describe("Output verification", () => {
       });
     });
 
-    describe("Testing non-trivial points", () => {
+    xdescribe("Testing non-trivial points", () => {
       xit("should return corret circle for center in lat -90", () => {});
       xit("should return corret circle for center in lat 90 ", () => {});
       xit("should return corret circle for center in lng 180 ", () => {});
@@ -510,17 +510,17 @@ describe("Output verification", () => {
       xit("should return corret circle for center in lat -90 lng -180 ", () => {});
     });
 
-    describe("Testing circles crossing the 180th Meridian", () => {
+    xdescribe("Testing circles crossing the 180th Meridian", () => {
       xit("center's longitude value is close to 180", () => {});
       xit("center's longitude value is close to -180", () => {});
     });
 
-    describe("Testing circles where the north pole is inside the circle's radius", () => {
+    xdescribe("Testing circles where the north pole is inside the circle's radius", () => {
       xit("test 1", () => {});
       xit("test 2", () => {});
     });
 
-    describe("Testing circles where the south pole is inside the circle's radius", () => {
+    xdescribe("Testing circles where the south pole is inside the circle's radius", () => {
       xit("test 1", () => {});
       xit("test 2", () => {});
     });
@@ -534,6 +534,97 @@ describe("Output verification", () => {
       }).coordinates[0];
 
       expect(sentAsObject).to.eql(sentAsNumber);
+    });
+
+    describe("should return circle drawn using right-hand rule if passed `{ rightHandRuleRule: true }`", () => {
+      it("Test 1: Pentagon", () => {
+        const coordinates = circleToPolygon(
+          [-77.055961, 38.870996],
+          200,
+          {
+            numberOfEdges: 5,
+            rightHandRule: true
+          }
+        ).coordinates[0];
+
+        // This is the same coordinates as the pentagon test
+        // but in opposite direction
+        const expectedCoordinates = [
+          [-77.055961, 38.872792],
+          [-77.053766, 38.871551],
+          [-77.054604, 38.869542],
+          [-77.057317, 38.869542],
+          [-77.058155, 38.871551],
+          [-77.055961, 38.872792]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("Test 2: 12 edges, center in [0, 0]", () => {
+        const coordinates = circleToPolygon(
+          [0, 0], 13, { numberOfEdges: 12, rightHandRule: true }
+        ).coordinates[0];
+
+        const expectedCoordinates = [
+          [0, 0.000116],
+          [0.000058, 0.000101],
+          [0.000101, 0.000058],
+          [0.000116, 0],
+          [0.000101, -0.000058],
+          [0.000058, -0.000101],
+          [0, -0.000116],
+          [-0.000058, -0.000101],
+          [-0.000101, -0.000058],
+          [-0.000116, 0],
+          [-0.000101, 0.000058],
+          [-0.000058, 0.000101],
+          [0, 0.000116]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
+
+      it("Test 3: With bearing", () => {
+        const coordinates = circleToPolygon(
+          [0, 0], 13, { numberOfEdges: 12, bearing: 90, rightHandRule: true }
+        ).coordinates[0];
+
+        // Same as should give rotated coordinates for bearing 90
+        // but in opposite direction 
+        const expectedCoordinates = [
+          [0.000116, 0],
+          [0.000101, -0.000058],
+          [0.000058, -0.000101],
+          [0, -0.000116],
+          [-0.000058, -0.000101],
+          [-0.000101, -0.000058],
+          [-0.000116, 0],
+          [-0.000101, 0.000058],
+          [-0.000058, 0.000101],
+          [0, 0.000116],
+          [0.000058, 0.000101],
+          [0.000101, 0.000058],
+          [0.000116, 0]
+        ];
+
+        coordinates.forEach((cord, cordIndex) => {
+          cord.forEach((value, valueIndex) => {
+            const expectedValue = expectedCoordinates[cordIndex][valueIndex];
+            expect(value).to.be.closeTo(expectedValue, 0.00001);
+          });
+        });
+      });
     });
   });
 });

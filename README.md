@@ -19,12 +19,11 @@ const circleToPolygon = require("circle-to-polygon");
 
 const coordinates = [-27.4575887, -58.99029]; //[lon, lat]
 const radius = 100; // in meters
-const numberOfEdges = 32; //optional that defaults to 32
+const options = { numberOfEdges: 32 }; //optional, that defaults to { numberOfEdges: 32 }
 
-let polygon = circleToPolygon(coordinates, radius, numberOfEdges);
+let polygon = circleToPolygon(coordinates, radius, options);
 
 /*
- *
 polygon:
  
  type = 'Polygon'
@@ -71,14 +70,16 @@ polygon:
   - Second Element: `latitude` **[Number][numberdef]** **\*required**, can be any number `<=90 `and `>=-90`
   - Third Element: Ignored if present
 - `radius` **[Number][numberdef]** **\*required**, can be any number `>0`
-- `numberOfEdges` **[Number][numberdef]** can be any number `>=3`, defaults to 32 when undefined
-- `earthRadius` **[Number][numberdef]** can be any number `>0`, defaults to 6378137 (equatorial Earth radius) when undefined
-- `bearing` **[Number][numberdef]** can be any number, defaults to 0 when undefined
+- `options` **[Object][objectdef]** or **[Number][numberdef]**. Omitting this variable is same as passing `{ numberOfEdges: 32 }` and passing a number is same as passing `{ numberOfEdges: <number> }`
+  - `numberOfEdges` **[Number][numberdef]** can be any number >=3. Defaults to 32 when undefined
+  - `earthRadius` **[Number][numberdef]** can be any number `>0`. Defaults to 6378137 (equatorial Earth radius) when undefined
+  - `bearing` **[Number][numberdef]** can be any number. Defaults to 0 when undefined. How many degrees the circle should be rotated. (Most noticeable for "circles" with few edges.)
+  - `rightHandRule` **[Boolean][booldef]** default to false when undefined. If true, the circle will be drawn in the opposite direction. This is useful when drawing a hole in another shape, or if your system is following the old standard.
 
 ## Disclaimers
 
 - **Decimal values will not throw error for numberOfEdges!** Instead one of the edges of the polygon will be smaller than the others. In other words, all edges will not have the same length if a decimal number is passed as numberOfEdges.
-- A circle whoes edge cross longitude edges (-180 or 180) or a latitude edge (-90 or 90) will contain coordinate points that are outside the stanardized coordinates (eg: [182, 23]). This is because there are two ways to represent a line going from [179, x] to [181, y]. One way is simply writing it as [[179, x], [182, y]] while the other is to write it as a multi-polygon. Version <= 2.0.x does only support the first way while release of 2.1.0 will support multi-polygons as well.
+- A circle whose edge cross longitude edges (-180 or 180) or a latitude edge (-90 or 90) will contain coordinate points that are outside the standardized coordinates (eg: [182, 23]). This is because there are two ways to represent a line going from [179, x] to [181, y]. One way is simply writing it as [[179, x], [182, y]] while the other is to write it as a multi-polygon. There is a plan to support multi-polygons but it has not yet been implemented.
 
 ## Authors
 
@@ -94,4 +95,6 @@ polygon:
 [ISC](./LICENSE.txt)
 
 [arraydef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[booldef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 [numberdef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[objectdef]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object

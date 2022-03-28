@@ -9,11 +9,11 @@ describe("Output verification", () => {
       result = circleToPolygon([16.226412, 58.556493], 138, 3);
     });
 
-    it("should have atribute 'type' with value 'Polygon'", () => {
+    it("should have attribute 'type' with value 'Polygon'", () => {
       expect(result).to.haveOwnProperty("type", "Polygon");
     });
 
-    it("should have atribute 'coordinates' of type 'array'", () => {
+    it("should have attribute 'coordinates' of type 'array'", () => {
       expect(result).to.haveOwnProperty("coordinates");
       expect(result.coordinates).to.be.an("array");
     });
@@ -36,7 +36,7 @@ describe("Output verification", () => {
 
   describe("Polygon should have valid coordinates", () => {
     /*
-      Not all engins get the same value, so we use rounded values.
+      Not all engines get the same value, so we use rounded values.
       6 decimal points is about 11 cm (true for both lat/lng and 
       geoJSON coordinates).
     */
@@ -140,7 +140,7 @@ describe("Output verification", () => {
         });
       });
 
-      it("should give same value when numberOfSegemnts is undefined or 32", () => {
+      it("should give same value when numberOfSegments is undefined or 32", () => {
         const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
           .coordinates[0];
         const coordinates = circleToPolygon([131.034184, -25.343467], 5000, undefined)
@@ -154,7 +154,7 @@ describe("Output verification", () => {
         });
       });
 
-      it("should give same value when numberOfSegemnts is { numberOfEdges: undefined } or 32", () => {
+      it("should give same value when numberOfSegments is { numberOfEdges: undefined } or 32", () => {
         const expectedCoordinates = circleToPolygon([131.034184, -25.343467], 5000, 32)
           .coordinates[0];
         const coordinates = circleToPolygon([131.034184, -25.343467], 5000, {
@@ -500,14 +500,14 @@ describe("Output verification", () => {
     });
 
     xdescribe("Testing non-trivial points", () => {
-      xit("should return corret circle for center in lat -90", () => {});
-      xit("should return corret circle for center in lat 90 ", () => {});
-      xit("should return corret circle for center in lng 180 ", () => {});
-      xit("should return corret circle for center in lng -180 ", () => {});
-      xit("should return corret circle for center in lat 90 lng 180 ", () => {});
-      xit("should return corret circle for center in lat 90 lng -180 ", () => {});
-      xit("should return corret circle for center in lat -90 lng 180 ", () => {});
-      xit("should return corret circle for center in lat -90 lng -180 ", () => {});
+      xit("should return correct circle for center in lat -90", () => {});
+      xit("should return correct circle for center in lat 90 ", () => {});
+      xit("should return correct circle for center in lng 180 ", () => {});
+      xit("should return correct circle for center in lng -180 ", () => {});
+      xit("should return correct circle for center in lat 90 lng 180 ", () => {});
+      xit("should return correct circle for center in lat 90 lng -180 ", () => {});
+      xit("should return correct circle for center in lat -90 lng 180 ", () => {});
+      xit("should return correct circle for center in lat -90 lng -180 ", () => {});
     });
 
     xdescribe("Testing circles crossing the 180th Meridian", () => {

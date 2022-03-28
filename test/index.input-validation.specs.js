@@ -71,7 +71,7 @@ describe("Input verification", () => {
     });
   });
   describe("Validating radius input", () => {
-    it("should throw error on invalidy type input", () => {
+    it("should throw error on invalid type input", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], [], 32),
         Error,
@@ -89,7 +89,7 @@ describe("Input verification", () => {
       // TODO: Find biggest value
     });
 
-    it("should throw error on too smal radius value", () => {
+    it("should throw error on too small radius value", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 0, 32),
         Error,
@@ -213,7 +213,7 @@ describe("Input verification", () => {
       );
     });
 
-    it("should throw error on too smal earthRadius value", () => {
+    it("should throw error on too small earthRadius value", () => {
       assert.throws(
         () => circleToPolygon([-59.99029, -58.99029], 100, { earthRadius: 0 }),
         Error,

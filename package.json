@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/gabzim/circle-to-polygon#readme",
   "devDependencies": {
-    "chai": "^4.3.0",
+    "chai": "^4.3.6",
     "mocha": "^8.2.1"
   }
 }

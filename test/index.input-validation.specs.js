@@ -43,12 +43,12 @@ describe("Input verification", () => {
       assert.throws(
         () => circleToPolygon(["hello", -91], 100, 32),
         Error,
-        "ERROR! Longitude and Latitude has to be numbers but where string and number"
+        "ERROR! Longitude and Latitude has to be numbers but were string and number"
       );
       assert.throws(
         () => circleToPolygon([-58.99029, "konichiha"], 100, 32),
         Error,
-        "ERROR! Longitude and Latitude has to be numbers but where number and string"
+        "ERROR! Longitude and Latitude has to be numbers but were number and string"
       );
     });
 

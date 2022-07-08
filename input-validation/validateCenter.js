@@ -7,7 +7,7 @@ exports.validateCenter = function validateCenter(center) {
   var [lng, lat] = center;
   if (typeof lng !== "number" || typeof lat !== "number") {
     throw new Error(
-      `ERROR! Longitude and Latitude has to be numbers but where ${typeof lng} and ${typeof lat}`
+      `ERROR! Longitude and Latitude has to be numbers but were ${typeof lng} and ${typeof lat}`
     );
   }
   if (lng > 180 || lng < -180) {

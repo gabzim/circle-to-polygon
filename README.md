@@ -2,6 +2,12 @@
 
 The GeoJSON spec does not support circles. If you wish to create an area that represents a circle, your best bet is to create a polygon that roughly approximates the circle. In the limit of the number of edges becoming infinite, your Polygon will match a circle.
 
+## Example
+
+`circleToPolygon([173.283966, -41.270634], 20000, { numberOfEdges: 32 })` would yield the polygon below:
+
+![Example of a polygon with 20000 meter radius, 32 edges and center in 173.283966,-41.270634 (lon,lat)](example.png "Example circle (20km radius with 32 edges)")
+
 ## Installation
 
 `npm install --save circle-to-polygon`

@@ -6,6 +6,8 @@ The GeoJSON spec does not support circles. If you wish to create an area that re
 
 ![Example of a polygon with 20000 meter radius, 32 edges and center in 173.283966,-41.270634 (lon,lat)](example.png "Example circle (20km radius with 32 edges)")
 
+There is also a port to Go/Golang that can be found here: https://github.com/chrusty/go-circle-to-polygon
+
 ## Installation
 
 `npm install --save circle-to-polygon`
